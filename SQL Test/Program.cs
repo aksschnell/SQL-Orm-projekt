@@ -237,8 +237,7 @@ namespace SQL_Test
                             input3 = Console.ReadLine();
                             dyrTypeDelete(int.Parse(input3));
                             Console.WriteLine("Dyrtpen blev slettet");
-
-                            
+                                                       
 
 
                         }
@@ -268,8 +267,7 @@ namespace SQL_Test
                             input3 = Console.ReadLine();
                             patienterDelete(int.Parse(input3));
                             Console.WriteLine("Patienten blev slettet");
-
-
+                            
                         }
 
 
