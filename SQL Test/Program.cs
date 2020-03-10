@@ -19,6 +19,8 @@ namespace SQL_Test
             Behandlinger behandlinger = new Behandlinger(conn);
             Byer byer = new Byer(conn);
 
+
+
             //BehandlingsType
             void behandlingsTypeSave(string _type)
             {
@@ -62,16 +64,12 @@ namespace SQL_Test
 
             void behandlingerSave(int _patientid, int _EjerID, int _Behandling, DateTime _dato, int _pris)
             {
-             //   DateTime dato = new DateTime(_dato);
-                
-
                 behandlinger.PatientID = _patientid;
                 behandlinger.EjerID = _EjerID;
                 behandlinger.Behandling = _Behandling;
                 behandlinger.Dato = _dato;
                 behandlinger.Pris = _pris;
                 behandlinger.Save();
-
             }
 
             void behandlingerDelete(int _id)
@@ -92,10 +90,6 @@ namespace SQL_Test
                 byer.ID = _postnummer;
                 byer.Delete();
             }
-
-
-            //Commands:
-            //ÅR MÅNED DAG
 
             do
             {
@@ -155,8 +149,6 @@ namespace SQL_Test
                             behandlingerSave(int.Parse(patientID), int.Parse(ejerID), int.Parse(behandlingsTypeID), date1, (int.Parse(pris)));
                             Console.WriteLine("Behandlingen blev gemt");
 
-
-
                         }
 
                         else if (int.Parse(input2) == 2)
@@ -166,9 +158,7 @@ namespace SQL_Test
                             behandlingerDelete(int.Parse(input3));
                             Console.WriteLine("Behandlingen blev slettet");
                             Console.WriteLine("");
-
-
-
+                                                       
                         }
 
                         break;
@@ -232,17 +222,11 @@ namespace SQL_Test
 
                         if(int.Parse(input2) == 2)
                         {
-
                             Console.WriteLine("Indtast dyrtypens ID du ønsker at slette");
                             input3 = Console.ReadLine();
                             dyrTypeDelete(int.Parse(input3));
                             Console.WriteLine("Dyrtpen blev slettet");
-
-                            
-
-
-                        }
-                                           
+                        }                                           
                         
 
                         break;
@@ -269,9 +253,7 @@ namespace SQL_Test
                             patienterDelete(int.Parse(input3));
                             Console.WriteLine("Patienten blev slettet");
 
-
                         }
-
 
                         break;
 
@@ -282,10 +264,6 @@ namespace SQL_Test
                 }
 
             } while (true);
-
-                        
-
-
 
         }
     }
