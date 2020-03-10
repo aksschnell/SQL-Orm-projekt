@@ -62,6 +62,8 @@ namespace SQL_Test
                 patienter.Delete();
             }
 
+
+            //Behandlinger
             void behandlingerSave(int _patientid, int _EjerID, int _Behandling, DateTime _dato, int _pris)
             {
                 behandlinger.PatientID = _patientid;
@@ -78,6 +80,8 @@ namespace SQL_Test
                 behandlinger.Delete();
             }
 
+
+            //Byer
             void byerSave(int _postnummer , string _by)
             {
                 byer.Postnummer = _postnummer;
@@ -116,9 +120,10 @@ namespace SQL_Test
 
                 switch (int.Parse(input))
                 {
-
+                    //Vælger en af følgende cases afhængig af hvad brugeren har indtastet
                     case 1:
 
+                        //Behandlinger save
                         if (int.Parse(input2) == 1)
                         {
 
@@ -151,6 +156,7 @@ namespace SQL_Test
 
                         }
 
+                        //Behandlinger delete
                         else if (int.Parse(input2) == 2)
                         {                 
                             Console.WriteLine("Indtast ID'et på den behandling du ønsker at slette");
@@ -164,6 +170,7 @@ namespace SQL_Test
                         break;
                     case 2:
 
+                        //Behandlingstype save
                         if (int.Parse(input2) == 1)
                         {
                             Console.WriteLine("Indtast den nye behandlingsType navn");
@@ -174,6 +181,7 @@ namespace SQL_Test
 
                         }
 
+                        //Behandlingstype delete
                         if (int.Parse(input2) == 2)
                         {
 
@@ -187,7 +195,7 @@ namespace SQL_Test
                         break;
                     case 3:
 
-
+                        //Postnummer save
                         if (int.Parse(input2) == 1)
                         {
                             Console.WriteLine("Indtast den nye bys postnummer");
@@ -199,6 +207,7 @@ namespace SQL_Test
 
                         }
 
+                        //Postnummer delete
                         if(int.Parse(input2) == 2)
                         {
                             Console.WriteLine("Indtast byens postnummer du ønsker at slette");
@@ -212,6 +221,7 @@ namespace SQL_Test
                     case 4:
 
 
+                        //Dyrtype save
                         if(int.Parse(input2) == 1)
                         {
                             Console.WriteLine("Indtast dyrtype navn");
@@ -220,6 +230,7 @@ namespace SQL_Test
                             Console.WriteLine("Dyrtypen blev gemt");
                         }
 
+                        //Dyrtype delete
                         if(int.Parse(input2) == 2)
                         {
                             Console.WriteLine("Indtast dyrtypens ID du ønsker at slette");
@@ -233,6 +244,7 @@ namespace SQL_Test
                     case 5:
 
 
+                        //Patient save
                         if(int.Parse(input2) == 1)
                         {
                             Console.WriteLine("Indtast patientens navn");
@@ -246,6 +258,7 @@ namespace SQL_Test
 
                         }
 
+                        //Patient delete
                         if(int.Parse(input2) == 2)
                         {
                             Console.WriteLine("Indtast patientens ID som du ønsker at slette");
@@ -257,6 +270,8 @@ namespace SQL_Test
 
                         break;
 
+
+                        //Lukker programmet direkte
                     case 6:
                         Environment.Exit(0);
                         break;
