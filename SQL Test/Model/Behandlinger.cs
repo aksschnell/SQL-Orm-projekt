@@ -67,7 +67,7 @@ namespace SQL_Test.Model
 				PatientID,
 				EjerID,
 				Behandling,
-				Dato, 
+				Dato,
 				pris
 
 			};
