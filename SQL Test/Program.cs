@@ -20,7 +20,7 @@ namespace SQL_Test
             Byer byer = new Byer(conn);
 
 
-
+            //Cunstructor til hver table for effektivitet
             //BehandlingsType
             void behandlingsTypeSave(string _type)
             {
@@ -95,6 +95,8 @@ namespace SQL_Test
                 byer.Delete();
             }
 
+            //Looper det næste igennem indtil brugeren lukker programmet ved at skrive "6"
+
             do
             {
 
@@ -105,26 +107,28 @@ namespace SQL_Test
                 Console.WriteLine("(5 Patienter");
                 Console.WriteLine("(6 Luk programmet");
 
-                string input = Console.ReadLine();
+                string actionChoice = Console.ReadLine();
 
-                if(int.Parse(input) == 6)
+                //Tjekker til at starte med om man vil lukke programmet, så det ikke spørger om man vil save eller delete når man vil lukke
+
+                if(int.Parse(actionChoice) == 6)
                 {
                     Environment.Exit(0);
                 }
                 
 
                 Console.WriteLine("Tryk 1 for save, tryk 2 for delete");
-                string input2 = Console.ReadLine();
-                string input3;
+                string saveOrDelete = Console.ReadLine();
+         
 
 
-                switch (int.Parse(input))
+                switch (int.Parse(actionChoice))
                 {
                     //Vælger en af følgende cases afhængig af hvad brugeren har indtastet
                     case 1:
 
                         //Behandlinger save
-                        if (int.Parse(input2) == 1)
+                        if (int.Parse(saveOrDelete) == 1)
                         {
 
                             Console.WriteLine("Indtast patientens ID");
@@ -157,11 +161,11 @@ namespace SQL_Test
                         }
 
                         //Behandlinger delete
-                        else if (int.Parse(input2) == 2)
+                        else if (int.Parse(saveOrDelete) == 2)
                         {                 
                             Console.WriteLine("Indtast ID'et på den behandling du ønsker at slette");
-                            input3 = Console.ReadLine();
-                            behandlingerDelete(int.Parse(input3));
+                            string id = Console.ReadLine();
+                            behandlingerDelete(int.Parse(id));
                             Console.WriteLine("Behandlingen blev slettet");
                             Console.WriteLine("");
                                                        
@@ -171,23 +175,23 @@ namespace SQL_Test
                     case 2:
 
                         //Behandlingstype save
-                        if (int.Parse(input2) == 1)
+                        if (int.Parse(saveOrDelete) == 1)
                         {
                             Console.WriteLine("Indtast den nye behandlingsType navn");
-                            input3 = Console.ReadLine();
-                            behandlingsTypeSave(input3);
+                            string navn = Console.ReadLine();
+                            behandlingsTypeSave(navn);
                             Console.WriteLine("Behandlingstypen blev gemt");
                             Console.WriteLine("");
 
                         }
 
                         //Behandlingstype delete
-                        if (int.Parse(input2) == 2)
+                        if (int.Parse(saveOrDelete) == 2)
                         {
 
                             Console.WriteLine("Indtast ID'et på den behandlingsType du ønsker at slette");
-                            input3 = Console.ReadLine();
-                            behandlingsTypeDelete(int.Parse(input3));
+                            string id = Console.ReadLine();
+                            behandlingsTypeDelete(int.Parse(id));
                             Console.WriteLine("Behandlingstypen blev slettet");
                             Console.WriteLine("");
                         }
@@ -196,23 +200,23 @@ namespace SQL_Test
                     case 3:
 
                         //Postnummer save
-                        if (int.Parse(input2) == 1)
+                        if (int.Parse(saveOrDelete) == 1)
                         {
                             Console.WriteLine("Indtast den nye bys postnummer");
-                            input3 = Console.ReadLine();
+                            string postnummer = Console.ReadLine();
                             Console.WriteLine("Indtast byens navn");
                             string by = Console.ReadLine();
-                            byerSave(int.Parse(input3), by);
+                            byerSave(int.Parse(postnummer), by);
                             Console.WriteLine("Byen blev gemt");
 
                         }
 
                         //Postnummer delete
-                        if(int.Parse(input2) == 2)
+                        if(int.Parse(saveOrDelete) == 2)
                         {
                             Console.WriteLine("Indtast byens postnummer du ønsker at slette");
-                            input3 = Console.ReadLine();
-                            byerDelete(int.Parse(input3));
+                            string postnummer = Console.ReadLine();
+                            byerDelete(int.Parse(postnummer));
                             Console.WriteLine("Byen blev slettet");
                         }
 
@@ -222,20 +226,20 @@ namespace SQL_Test
 
 
                         //Dyrtype save
-                        if(int.Parse(input2) == 1)
+                        if(int.Parse(saveOrDelete) == 1)
                         {
                             Console.WriteLine("Indtast dyrtype navn");
-                            input3 = Console.ReadLine();
-                            dyrTypeSave(input3);
+                            string navn = Console.ReadLine();
+                            dyrTypeSave(navn);
                             Console.WriteLine("Dyrtypen blev gemt");
                         }
 
                         //Dyrtype delete
-                        if(int.Parse(input2) == 2)
+                        if(int.Parse(saveOrDelete) == 2)
                         {
                             Console.WriteLine("Indtast dyrtypens ID du ønsker at slette");
-                            input3 = Console.ReadLine();
-                            dyrTypeDelete(int.Parse(input3));
+                            string id = Console.ReadLine();
+                            dyrTypeDelete(int.Parse(id));
                             Console.WriteLine("Dyrtpen blev slettet");
                         }                                           
                         
@@ -245,7 +249,7 @@ namespace SQL_Test
 
 
                         //Patient save
-                        if(int.Parse(input2) == 1)
+                        if(int.Parse(saveOrDelete) == 1)
                         {
                             Console.WriteLine("Indtast patientens navn");
                             string navn = Console.ReadLine();
@@ -259,11 +263,11 @@ namespace SQL_Test
                         }
 
                         //Patient delete
-                        if(int.Parse(input2) == 2)
+                        if(int.Parse(saveOrDelete) == 2)
                         {
                             Console.WriteLine("Indtast patientens ID som du ønsker at slette");
-                            input3 = Console.ReadLine();
-                            patienterDelete(int.Parse(input3));
+                            string id = Console.ReadLine();
+                            patienterDelete(int.Parse(id));
                             Console.WriteLine("Patienten blev slettet");
 
                         }
