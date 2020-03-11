@@ -41,6 +41,8 @@ namespace SQL_Test.Model
 			myConn.Close();
 		}
 
+		
+
 		public void Delete()
 		{
 

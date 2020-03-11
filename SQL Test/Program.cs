@@ -31,7 +31,7 @@ namespace SQL_Test
             {
                 behandlingstype.ID = _id;
                 behandlingstype.Delete();
-            }
+            }            
 
             //Dyrtype
             void dyrTypeSave(string _type)
@@ -77,7 +77,18 @@ namespace SQL_Test
             {
                 behandlinger.ID = _id;
                 behandlinger.Delete();
-            }            
+            }
+
+            void behandlingerUpdate(int _id, int _patientid, int _EjerID, int _Behandling, DateTime _dato, int _pris)
+            {
+                behandlinger.ID = _id;
+                behandlinger.PatientID = _patientid;
+                behandlinger.EjerID = _EjerID;
+                behandlinger.Behandling = _Behandling;
+                behandlinger.Dato = _dato;
+                behandlinger.Pris = _pris;
+                behandlinger.Update();
+            }
 
             //Byer
             void byerSave(int _postnummer , string _by)
@@ -86,7 +97,17 @@ namespace SQL_Test
                 byer.By = _by;
                 byer.Save();
             }
-            
+
+            void byerUpdate(int _id, int _postnummer, string _by)
+            {
+
+                byer.ID = _id;
+                byer.Postnummer = _postnummer;
+                byer.By = _by;
+                byer.Update();
+
+            }
+                     
             void byerDelete(int _postnummer)
             {
                 byer.ID = _postnummer;
@@ -110,7 +131,7 @@ namespace SQL_Test
                 ejer.Delete();
             }
 
-            //Looper det næste igennem indtil brugeren lukker programmet ved at skrive "6"
+            //Looper det næste igennem indtil brugeren lukker programmet ved at skrive "7"
 
             do
             {
@@ -132,7 +153,7 @@ namespace SQL_Test
                 }
                 
 
-                Console.WriteLine("Tryk 1 for save, tryk 2 for delete");
+                Console.WriteLine("Tryk 1 for save, tryk 2 for delete, tryk 3 for update");
                 string saveOrDelete = Console.ReadLine();         
 
 
@@ -185,6 +206,42 @@ namespace SQL_Test
                                                        
                         }
 
+                        if (int.Parse(saveOrDelete) == 3)
+                        {
+
+                            Console.WriteLine("Indtast behandlingens ID som du ønsker at opdatere");
+                            string id = Console.ReadLine();
+
+                            Console.WriteLine("Indtast patientens ID");
+                            string patientID = Console.ReadLine();
+
+                            Console.WriteLine("Indtast Ejer ID");
+                            string ejerID = Console.ReadLine();
+
+                            Console.WriteLine("Indtast behandlingstype ID");
+                            string behandlingsTypeID = Console.ReadLine();
+
+                            Console.WriteLine("Indtast dag fx 25");
+                            string dag = Console.ReadLine();
+
+                            Console.WriteLine("Indtast måned");
+                            string måned = Console.ReadLine();
+
+                            Console.WriteLine("Indtast år");
+                            string år = Console.ReadLine();
+
+                            DateTime date1 = new DateTime(int.Parse(år), int.Parse(måned), int.Parse(dag));
+
+                            Console.WriteLine("Indtast pris");
+
+                            string pris = Console.ReadLine();
+
+                            behandlingerUpdate(int.Parse(id), int.Parse(patientID), int.Parse(ejerID), int.Parse(behandlingsTypeID), date1, (int.Parse(pris)));
+                            Console.WriteLine("Behandlingen blev opdateret");
+
+                        }
+
+
                         break;
                     case 2:
 
@@ -234,6 +291,20 @@ namespace SQL_Test
                             Console.WriteLine("Byen blev slettet");
                         }
 
+                        if(int.Parse(saveOrDelete) == 3)
+                        {
+                            Console.WriteLine("Indtast den bys postnummer du vil opdatere");
+                            string updatePostnummer = Console.ReadLine();
+                            Console.WriteLine("Indtast byens nye postnummer");
+                            string newPostnummer = Console.ReadLine();
+                            Console.WriteLine("Indtast byens nye navn");
+                            string newNavn = Console.ReadLine();
+
+                            byerUpdate(int.Parse(updatePostnummer), int.Parse(newPostnummer), newNavn);
+
+                            Console.WriteLine("Byen blev opdateret");
+
+                        }
 
                         break;
                     case 4:

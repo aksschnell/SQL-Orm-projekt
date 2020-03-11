@@ -53,6 +53,24 @@ namespace SQL_Test.Model
 
 		}
 
+
+		public void Update()
+		{
+			
+			string Query = "UPDATE [" + tableName + "] SET Postnummer = @Postnummer, [By] = @By Where Postnummer = @id";
+			myConn.Open();
+			SqlCommand cmd = new SqlCommand(Query, myConn);
+
+			cmd.Parameters.AddWithValue("@By", By);
+			cmd.Parameters.AddWithValue("@Postnummer", Postnummer);
+			cmd.Parameters.AddWithValue("@id", ID);
+					   			 		  			
+
+			cmd.ExecuteNonQuery();
+			myConn.Close();
+		}
+
+
 		public void Delete()
 		{
 

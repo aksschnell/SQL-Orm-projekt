@@ -107,6 +107,27 @@ namespace SQL_Test.Model
 			myConn.Close();
 		}
 
+
+		public void Update()
+		{
+			
+			string Query = "UPDATE [" + tableName + "] SET PatientID = @PatientID, EjerID = @EjerID, Behandling = @Behandling, Dato = @Dato, Pris = @Pris Where ID = @id";
+			myConn.Open();
+			SqlCommand cmd = new SqlCommand(Query, myConn);
+
+			cmd.Parameters.AddWithValue("@PatientID", PatientID);
+			cmd.Parameters.AddWithValue("@EjerID", EjerID);
+			cmd.Parameters.AddWithValue("@Behandling", Behandling);
+			cmd.Parameters.AddWithValue("@dato", Dato);
+			cmd.Parameters.AddWithValue("@Pris", Pris);
+			cmd.Parameters.AddWithValue("@id", ID);
+
+
+			cmd.ExecuteNonQuery();
+			myConn.Close();
+
+		}
+
 		public void Delete()
 		{
 
