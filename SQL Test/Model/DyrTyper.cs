@@ -12,6 +12,8 @@ namespace SQL_Test.Model
 
 		private SqlConnection myConn;
 
+		public string tableName = "DyrTyper";
+
 		public int ID
 		{
 			get { return id; }
@@ -42,6 +44,21 @@ namespace SQL_Test.Model
 		}
 
 		
+		public void Update()
+		{
+
+			string Query = "UPDATE [" + tableName + "] SET Type = @Type  Where ID = @id";
+			myConn.Open();
+			SqlCommand cmd = new SqlCommand(Query, myConn);
+
+			cmd.Parameters.AddWithValue("@Type", Type);			
+			cmd.Parameters.AddWithValue("@id", ID);
+
+
+			cmd.ExecuteNonQuery();
+			myConn.Close();
+
+		}
 
 		public void Delete()
 		{

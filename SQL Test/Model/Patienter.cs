@@ -92,6 +92,28 @@ namespace SQL_Test.Model
 			myConn.Close();
 		}
 
+
+		public void Update()
+		{
+			//Skal laves
+			string Query = "UPDATE [" + tableName + "] SET PatientNavn = @PatientNavn, EjerID = @EjerID, Type = @Type Where ID = @id";
+			myConn.Open();
+			SqlCommand cmd = new SqlCommand(Query, myConn);
+
+			cmd.Parameters.AddWithValue("@PatientNavn", PatientNavn);
+			cmd.Parameters.AddWithValue("@EjerID", EjerID);
+			cmd.Parameters.AddWithValue("@Type", Type);
+			cmd.Parameters.AddWithValue("@id", ID);
+
+
+
+
+			cmd.ExecuteNonQuery();
+			myConn.Close();
+
+		}
+
+
 		public void Delete()
 		{
 

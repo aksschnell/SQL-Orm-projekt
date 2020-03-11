@@ -45,7 +45,25 @@ namespace SQL_Test.Model
 			myConn.Close();							
 
 		}
-		
+
+		public void Update()
+		{
+
+			string Query = "UPDATE [" + tableName + "] SET BehandlingsTypeNavn = @Type Where ID = @id";
+			myConn.Open();
+			SqlCommand cmd = new SqlCommand(Query, myConn);
+
+			cmd.Parameters.AddWithValue("@id", ID);
+			cmd.Parameters.AddWithValue("@Type", Type);
+
+
+			cmd.ExecuteNonQuery();
+			myConn.Close();
+
+		}
+
+
+
 		public void Delete()
 		{
 

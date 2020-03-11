@@ -20,6 +20,7 @@ namespace SQL_Test
             Ejer ejer = new Ejer(conn);
 
             //Cunstructor til hver table for effektivitet
+
             //BehandlingsType
             void behandlingsTypeSave(string _type)
             {
@@ -31,7 +32,15 @@ namespace SQL_Test
             {
                 behandlingstype.ID = _id;
                 behandlingstype.Delete();
-            }            
+            }
+
+            void behandlingsTypeUpdate(int _id, string _type)
+            {
+                behandlingstype.ID = _id;
+                behandlingstype.Type = _type;
+                behandlingstype.Update();
+            }
+
 
             //Dyrtype
             void dyrTypeSave(string _type)
@@ -40,6 +49,13 @@ namespace SQL_Test
                 dyrtype.Save();
             }
 
+            void dyrTypeUpdate(int _id, string _type)
+            {
+                dyrtype.ID = _id;
+                dyrtype.Type = _type;
+                dyrtype.Update();
+            }
+                                 
             void dyrTypeDelete(int _id)
             {
                 dyrtype.ID = _id;
@@ -53,6 +69,15 @@ namespace SQL_Test
                 patienter.EjerID = _ejerid;
                 patienter.Type = _type;
                 patienter.Save();
+            }
+
+            void patienterUpdate(int _id, string _navn, int _ejerid, int _type)
+            {
+                patienter.ID = _id;
+                patienter.PatientNavn = _navn;
+                patienter.EjerID = _ejerid;
+                patienter.Type = _type;
+                patienter.Update();
             }
 
             void patienterDelete(int _id)
@@ -125,6 +150,20 @@ namespace SQL_Test
                 ejer.Save();
 
             }
+
+            void ejerUpdate(int _id, string _kundeNavn, string _vejNavn, int _postnummer, string _tilhørendePatient)
+            {
+
+                ejer.ID = _id;
+                ejer.VejNavn = _vejNavn;
+                ejer.postNummer = _postnummer;
+                ejer.TilhørendePatient = _tilhørendePatient;
+                ejer.KundeNavn = _kundeNavn;
+                ejer.Update();
+
+            }
+
+
             void ejerDelete(int _id)
             {
                 ejer.ID = _id;
@@ -206,6 +245,7 @@ namespace SQL_Test
                                                        
                         }
 
+                        //Behandlinger update
                         if (int.Parse(saveOrDelete) == 3)
                         {
 
@@ -255,7 +295,7 @@ namespace SQL_Test
                             Console.WriteLine("");
 
                         }
-
+                        
                         //Behandlingstype delete
                         if (int.Parse(saveOrDelete) == 2)
                         {
@@ -266,6 +306,19 @@ namespace SQL_Test
                             Console.WriteLine("Behandlingstypen blev slettet");
                             Console.WriteLine("");
                         }
+
+                        if (int.Parse(saveOrDelete) == 3)
+                        {
+                            Console.WriteLine("Indtast behandlingstypens ID som du ønsker at opdatere");
+                            string id = Console.ReadLine();
+                            Console.WriteLine("Indtast behandlingstypens nye navn");
+                            string navn = Console.ReadLine();
+                            behandlingsTypeUpdate(int.Parse(id), navn);
+                            Console.WriteLine("Behandlingstypen blev gemt");
+                            Console.WriteLine("");
+
+                        }
+
 
                         break;
                     case 3:
@@ -318,16 +371,31 @@ namespace SQL_Test
                             dyrTypeSave(navn);
                             Console.WriteLine("Dyrtypen blev gemt");
                         }
+                                              
+
 
                         //Dyrtype delete
-                        if(int.Parse(saveOrDelete) == 2)
+                        if (int.Parse(saveOrDelete) == 2)
                         {
                             Console.WriteLine("Indtast dyrtypens ID du ønsker at slette");
                             string id = Console.ReadLine();
                             dyrTypeDelete(int.Parse(id));
                             Console.WriteLine("Dyrtpen blev slettet");
-                        }                                          
-                        
+                        }
+
+                        //Dyrtpe update
+                        if (int.Parse(saveOrDelete) == 3)
+                        {
+
+                            Console.WriteLine("Indtast dyrtypens id du ønsker at opdatere");
+                            string id = Console.ReadLine();
+                            Console.WriteLine("Indtast dyrtypens nye navn");
+                            string navn = Console.ReadLine();
+                            dyrTypeUpdate(int.Parse(id),navn);
+                            Console.WriteLine("Dyrtypen blev opdateret");
+                        }
+
+
 
                         break;
                     case 5:
@@ -357,10 +425,28 @@ namespace SQL_Test
                             
                         }
 
+                        //Patient Update
+                        if (int.Parse(saveOrDelete) == 3)
+                        {
+                            Console.WriteLine("Indtast patientens id som du vil opdatere");
+                            string id = Console.ReadLine();
+                            Console.WriteLine("Indtast patientens navn");
+                            string navn = Console.ReadLine();
+                            Console.WriteLine("Indtast patientens ejerID");
+                            string ejerID = Console.ReadLine();
+                            Console.WriteLine("Indtast dyrtype ID");
+                            string type = Console.ReadLine();
+                            patienterUpdate(int.Parse(id), navn, int.Parse(ejerID), int.Parse(type));
+                            Console.WriteLine("Patienten blev gemt");
+
+                        }
+
                         break;
 
                     case 6:
 
+
+                        //Ejer Save
                         if(int.Parse(saveOrDelete) == 1)
                         {
 
@@ -377,7 +463,8 @@ namespace SQL_Test
                             Console.WriteLine("Ejeren blev gemt");                                                  
 
                         }
-
+                        
+                        //Ejer Delete 
                         if(int.Parse(saveOrDelete) == 2)
                         {
 
@@ -387,6 +474,26 @@ namespace SQL_Test
                             Console.WriteLine("Ejeren blev slettet");
 
                         }
+
+                        if (int.Parse(saveOrDelete) == 3)
+                        {
+
+                            Console.WriteLine("Indtast den kunde du ønsker at opdateres ID");
+                            string id = Console.ReadLine();
+                            Console.WriteLine("Indtast kundens navn");
+                            string navn = Console.ReadLine();
+                            Console.WriteLine("Indtast postnummer");
+                            string postnummer = Console.ReadLine();
+                            Console.WriteLine("Indtast kundens vejnavn");
+                            string vejnavn = Console.ReadLine();
+                            Console.WriteLine("Indtast tilhørende patient");
+                            string tilhørendepatient = Console.ReadLine();
+
+                            ejerUpdate(int.Parse(id), navn, vejnavn, int.Parse(postnummer), tilhørendepatient);
+                            Console.WriteLine("Ejeren blev opdateret");
+
+                        }
+
 
                         break;
 

@@ -23,7 +23,8 @@ namespace SQL_Test.Model
 			get { return id; }
 			set { id = value; }
 		}
-
+		
+	
 		public string VejNavn
 		{
 			get { return vejNavn; }
@@ -98,6 +99,26 @@ namespace SQL_Test.Model
 		}
 
 
+		public void Update()
+		{
+
+			string Query = "UPDATE [" + tableName + "] SET VejNavn = @VejNavn, PSTNR = @PSTNR, KundeNavn = @KundeNavn, TilhørendePatienter = @TilhørendePatienter Where EjerID = @EjerID";
+			myConn.Open();
+			SqlCommand cmd = new SqlCommand(Query, myConn);
+			
+			
+			cmd.Parameters.AddWithValue("@EjerID", id);
+			cmd.Parameters.AddWithValue("@VejNavn", VejNavn);
+			cmd.Parameters.AddWithValue("@PSTNR", postNummer);
+			cmd.Parameters.AddWithValue("@KundeNavn", KundeNavn);
+			cmd.Parameters.AddWithValue("@TilhørendePatienter", TilhørendePatient);
+
+
+			cmd.ExecuteNonQuery();
+			myConn.Close();
+
+
+		}
 
 		public void Delete()
 		{
