@@ -9,7 +9,6 @@ namespace SQL_Test
     {
         static void Main(string[] args)
         {
-
             string connectionString = "Server=localhost; Database=Vet;Uid=August;Pwd=1234";
             SqlConnection conn = new SqlConnection(connectionString);
             
@@ -18,7 +17,7 @@ namespace SQL_Test
             Patienter patienter = new Patienter(conn);
             Behandlinger behandlinger = new Behandlinger(conn);
             Byer byer = new Byer(conn);
-
+            Ejer ejer = new Ejer(conn);
 
             //Cunstructor til hver table for effektivitet
             //BehandlingsType
@@ -27,7 +26,7 @@ namespace SQL_Test
                 behandlingstype.Type = _type;
                 behandlingstype.Save();
             }
-
+           
             void behandlingsTypeDelete(int _id)
             {
                 behandlingstype.ID = _id;
@@ -78,8 +77,7 @@ namespace SQL_Test
             {
                 behandlinger.ID = _id;
                 behandlinger.Delete();
-            }
-
+            }            
 
             //Byer
             void byerSave(int _postnummer , string _by)
@@ -95,31 +93,47 @@ namespace SQL_Test
                 byer.Delete();
             }
 
+            //Ejer
+            void ejerSave(string _kundeNavn, string _vejNavn, int _postnummer, string _tilhørendePatient)
+            {
+             
+                ejer.VejNavn = _vejNavn;
+                ejer.postNummer = _postnummer;
+                ejer.TilhørendePatient = _tilhørendePatient;
+                ejer.KundeNavn = _kundeNavn;
+                ejer.Save();
+
+            }
+            void ejerDelete(int _id)
+            {
+                ejer.ID = _id;
+                ejer.Delete();
+            }
+
             //Looper det næste igennem indtil brugeren lukker programmet ved at skrive "6"
 
             do
             {
-
                 Console.WriteLine("(1 Behandlinger");
                 Console.WriteLine("(2 BehandlingsType");
                 Console.WriteLine("(3 Byer");
                 Console.WriteLine("(4 DyrTyper");
                 Console.WriteLine("(5 Patienter");
-                Console.WriteLine("(6 Luk programmet");
+                Console.WriteLine("(6 Ejer");
+                Console.WriteLine("(7 Luk programmet");
 
                 string actionChoice = Console.ReadLine();
 
                 //Tjekker til at starte med om man vil lukke programmet, så det ikke spørger om man vil save eller delete når man vil lukke
 
-                if(int.Parse(actionChoice) == 6)
+                if(int.Parse(actionChoice) == 7)
                 {
                     Environment.Exit(0);
                 }
                 
 
                 Console.WriteLine("Tryk 1 for save, tryk 2 for delete");
-                string saveOrDelete = Console.ReadLine();
-         
+                string saveOrDelete = Console.ReadLine();         
 
 
                 switch (int.Parse(actionChoice))
@@ -241,7 +255,7 @@ namespace SQL_Test
                             string id = Console.ReadLine();
                             dyrTypeDelete(int.Parse(id));
                             Console.WriteLine("Dyrtpen blev slettet");
-                        }                                           
+                        }                                          
                         
 
                         break;
@@ -269,14 +283,44 @@ namespace SQL_Test
                             string id = Console.ReadLine();
                             patienterDelete(int.Parse(id));
                             Console.WriteLine("Patienten blev slettet");
+                            
+                        }
+
+                        break;
+
+                    case 6:
+
+                        if(int.Parse(saveOrDelete) == 1)
+                        {
+
+                            Console.WriteLine("Indtast kundens navn");
+                            string navn = Console.ReadLine();
+                            Console.WriteLine("Indtast postnummer");
+                            string postnummer = Console.ReadLine();
+                            Console.WriteLine("Indtast kundens vejnavn");
+                            string vejnavn = Console.ReadLine();
+                            Console.WriteLine("Indtast tilhørende patient");
+                            string tilhørendepatient = Console.ReadLine();
+
+                            ejerSave(navn,vejnavn,int.Parse(postnummer),tilhørendepatient);
+                            Console.WriteLine("Ejeren blev gemt");                                                  
+
+                        }
+
+                        if(int.Parse(saveOrDelete) == 2)
+                        {
+
+                            Console.WriteLine("Indtast kunden du ønsker at slette");
+                            string id = Console.ReadLine();
+                            ejerDelete(int.Parse(id));
+                            Console.WriteLine("Ejeren blev slettet");
 
                         }
 
                         break;
 
-
                         //Lukker programmet direkte
-                    case 6:
+                    case 7:
                         Environment.Exit(0);
                         break;
 
